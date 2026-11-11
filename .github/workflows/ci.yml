@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    # The AppleScript backend only runs on macOS, but the suite under test is the
+    # pure parsing/config layer, so Linux is enough and faster.
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Lint
+        run: uv run --python ${{ matrix.python-version }} ruff check .
+
+      - name: Format check
+        run: uv run --python ${{ matrix.python-version }} ruff format --check .
+
+      - name: Tests
+        run: uv run --python ${{ matrix.python-version }} pytest
+
+      - name: Build
+        run: uv build

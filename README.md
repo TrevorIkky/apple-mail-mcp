@@ -154,8 +154,12 @@ with `list_mailboxes`; it is `INBOX` on some accounts and `Inbox` on others.
 ```bash
 git clone https://github.com/TrevorIkky/apple-mail-mcp
 cd apple-mail-mcp
+uv run pytest
 uv run apple-mail-mcp --selftest
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the layout and the rules that keep
+Mail.app from wedging.
 
 ## License
 
