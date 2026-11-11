@@ -1,0 +1,32 @@
+[project]
+name = "apple-mail-mcp"
+version = "0.1.0"
+description = "MCP server for reading Apple Mail on macOS, with an AppleScript backend and a fast opt-in IMAP backend"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Trevor Ikky" }]
+keywords = ["mcp", "apple-mail", "macos", "email", "imap", "applescript"]
+classifiers = [
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS :: MacOS X",
+  "Programming Language :: Python :: 3",
+  "Topic :: Communications :: Email",
+]
+dependencies = ["mcp>=2.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/TrevorIkky/apple-mail-mcp"
+Issues = "https://github.com/TrevorIkky/apple-mail-mcp/issues"
+
+[project.scripts]
+apple-mail-mcp = "apple_mail_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/apple_mail_mcp"]
