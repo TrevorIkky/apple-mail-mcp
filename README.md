@@ -18,7 +18,7 @@ You need macOS with Mail.app set up, and [uv](https://docs.astral.sh/uv/).
 ### Claude Code
 
 ```bash
-claude mcp add apple-mail -s user -- uvx apple-mail-mcp
+claude mcp add apple-mail -s user -- uvx --from git+https://github.com/TrevorIkky/apple-mail-mcp apple-mail-mcp
 ```
 
 ### Claude Desktop, or any MCP client
@@ -31,7 +31,11 @@ Add this to the client's MCP config (for Claude Desktop that is
   "mcpServers": {
     "apple-mail": {
       "command": "uvx",
-      "args": ["apple-mail-mcp"]
+      "args": [
+        "--from",
+        "git+https://github.com/TrevorIkky/apple-mail-mcp",
+        "apple-mail-mcp"
+      ]
     }
   }
 }
@@ -46,7 +50,7 @@ the invoice"*, *"draft a reply agreeing to Tuesday"*.
 ### Check it works
 
 ```bash
-uvx apple-mail-mcp --selftest
+uvx --from git+https://github.com/TrevorIkky/apple-mail-mcp apple-mail-mcp --selftest
 ```
 
 That prints your account names and the five newest messages in the first one.
@@ -61,6 +65,7 @@ That prints your account names and the five newest messages in the first one.
 | `list_mailboxes` | Folders in an account |
 | `list_messages` | Newest messages, headers only, with sender/subject/unread filters |
 | `read_messages` | Full bodies for specific message ids |
+| `read_by_position` | Full bodies by position in the mailbox (1 = newest) — use on slow mailboxes like Sent |
 | `search_messages` | Find by sender or subject (optionally body text) |
 | `create_draft` | Save a draft in Mail — never sends |
 | `imap_search` / `imap_fetch` / `imap_mailboxes` | The fast path, see below |
